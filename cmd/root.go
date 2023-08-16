@@ -12,7 +12,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var dataFile string
+var DataFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -53,6 +53,6 @@ func init() {
 		logging.ErrorAndQuit(fmt.Errorf("Unable to detect home directory. Please set data file using --datafile."))
 	}
 
-	rootCmd.PersistentFlags().StringVar(&dataFile, "datafile", home+string(os.PathSeparator)+"todos.json", "data file to store todos")
+	rootCmd.PersistentFlags().StringVar(&DataFile, "datafile", home+string(os.PathSeparator)+"todos.json", "data file to store todos")
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

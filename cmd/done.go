@@ -21,7 +21,7 @@ var doneCmd = &cobra.Command{
 }
 
 func doneRun(cmd *cobra.Command, args []string) {
-	items, err := todo.ReadItems(dataFile)
+	items, err := todo.ReadItems(DataFile)
 	if err != nil {
 		logging.ErrorAndQuit(err)
 	}
@@ -34,7 +34,7 @@ func doneRun(cmd *cobra.Command, args []string) {
 			items[i-1].DoneDate = time.Now()
 			fmt.Printf("%v %q %v\n", items[i-1].Label(), items[i-1].Text, "marked done")
 
-			todo.SaveItems(dataFile, items)
+			todo.SaveItems(DataFile, items)
 		} else {
 			log.Println(i, "doesn't match any items")
 		}

@@ -24,7 +24,7 @@ var listCmd = &cobra.Command{
 }
 
 func listRun(cmd *cobra.Command, args []string) {
-	items, err := todo.ReadItems(dataFile)
+	items, err := todo.ReadItems(DataFile)
 	if err != nil {
 		logging.ErrorAndQuit(err)
 	}

@@ -20,7 +20,7 @@ var delCmd = &cobra.Command{
 }
 
 func delRun(cmd *cobra.Command, args []string) {
-	items, err := todo.ReadItems(dataFile)
+	items, err := todo.ReadItems(DataFile)
 	if err != nil {
 		logging.ErrorAndQuit(err)
 	}
@@ -43,7 +43,7 @@ func delRun(cmd *cobra.Command, args []string) {
 			fmt.Printf("%v %q %v\n", items[i].Label(), items[i].Text, "removed")
 		}
 	}
-	todo.SaveItems(dataFile, newItems)
+	todo.SaveItems(DataFile, newItems)
 }
 
 func init() {

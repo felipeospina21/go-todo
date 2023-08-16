@@ -33,7 +33,7 @@ func addRun(cmd *cobra.Command, args []string) {
 	v, _ := cmd.Flags().GetInt("priority")
 	checkPriorityFlagVal(v)
 
-	items, err := todo.ReadItems(dataFile)
+	items, err := todo.ReadItems(DataFile)
 
 	for _, arg := range args {
 		item := todo.Item{Text: arg}
@@ -42,7 +42,7 @@ func addRun(cmd *cobra.Command, args []string) {
 		fmt.Printf("%q added\n", item.Text)
 	}
 
-	err = todo.SaveItems(dataFile, items)
+	err = todo.SaveItems(DataFile, items)
 	if err != nil {
 		logging.ErrorAndQuit(err)
 	}
