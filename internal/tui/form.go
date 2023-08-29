@@ -6,6 +6,7 @@ import (
 
 	"github.com/charmbracelet/bubbles/help"
 	"github.com/charmbracelet/bubbles/key"
+	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/textarea"
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
@@ -41,8 +42,46 @@ func (f Form) CreateTask() Task {
 	return Task{f.col.status, f.title.Value(), f.description.Value(), 2, 0}
 }
 
+func SaveItems(filename string, items []Task) error {
+	b, err := json.Marshal(items)
+	if err != nil {
+		return err
+	}
 
+	err = os.WriteFile(filename, b, 0644)
+	if err != nil {
+		return err
+	}
 
+	return nil
+}
+
+type ItemsJson struct {
+	todo []list.Item
+}
+
+func ReadItems(filename string) ([]list.Item, error) {
+	b, err := os.ReadFile(filename)
+	var items ItemsJson
+
+	if err != nil {
+		if f, c_err := os.Create(filename); c_err != nil {
+			return []list.Item{}, c_err
+		} else {
+			defer f.Close()
+		}
+	}
+
+	if err := json.Unmarshal(b, &items); err != nil {
+		return []list.Item{}, err
+	}
+
+	// for i := range items {
+	// 	items[i].position = i + 1
+	// }
+
+	return items.todo, nil
+}
 
 func (f Form) Init() tea.Cmd {
 	return nil

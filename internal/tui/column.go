@@ -15,17 +15,9 @@ type column struct {
 	width  int
 }
 
-func (c *column) Focus() {
-	c.focus = true
-}
-
-func (c *column) Blur() {
-	c.focus = false
-}
-
-func (c *column) Focused() bool {
-	return c.focus
-}
+func (c *column) Focus()        { c.focus = true }
+func (c *column) Blur()         { c.focus = false }
+func (c *column) Focused() bool { return c.focus }
 
 func newColumn(status status) column {
 	var focus bool
@@ -136,3 +128,13 @@ func (c *column) MoveToNext() tea.Cmd {
 
 	return tea.Sequence(cmd, func() tea.Msg { return moveMsg{task} })
 }
+
+// type itemsMsg = []Task
+//
+// func GetItems() tea.Msg {
+// 	home, _ := homedir.Dir()
+// 	dataFile := home + string(os.PathSeparator) + "todos.json"
+// 	items, _ := ReadItems(dataFile)
+//
+// 	return itemsMsg(items)
+// }

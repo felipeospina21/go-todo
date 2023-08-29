@@ -21,14 +21,6 @@ func (t *Task) Next() {
 }
 
 // implement the list.Item interface
-func (t Task) FilterValue() string {
-	return t.title
-}
-
-func (t Task) Title() string {
-	return t.title
-}
-
-func (t Task) Description() string {
-	return t.description
-}
+func (t Task) FilterValue() string { return t.title }
+func (t Task) Title() string       { return t.title }
+func (t Task) Description() string { return t.description }

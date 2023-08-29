@@ -45,7 +45,20 @@ func (m *Board) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.loaded = true
 		return m, tea.Batch(cmds...)
 	case Form:
+		// home, err := homedir.Dir()
+		// dataFile := home + string(os.PathSeparator) + "todos.json"
 		newTask := msg.CreateTask()
+
+		// items, err := ReadItems(dataFile)
+		// items = append(items, newTask)
+		// fmt.Println("new task created", newTask)
+
+		err := SaveItems("newtodos.json", []Task{newTask})
+		if err != nil {
+			logging.ErrorAndQuit(err)
+		}
+
+		log.Fatal(newTask)
 		return m, m.cols[m.focused].Set(msg.index, newTask)
 	case moveMsg:
 		return m, m.cols[m.focused.getNext()].Set(APPEND, msg.Task)
